@@ -30,10 +30,13 @@
         {
             this.debugGroupBox = new System.Windows.Forms.GroupBox();
             this.browserPanel = new System.Windows.Forms.Panel();
+            this.debugGotoIndexButton = new System.Windows.Forms.Button();
+            this.debugGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // debugGroupBox
             // 
+            this.debugGroupBox.Controls.Add(this.debugGotoIndexButton);
             this.debugGroupBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.debugGroupBox.Location = new System.Drawing.Point(0, 0);
             this.debugGroupBox.Name = "debugGroupBox";
@@ -50,6 +53,16 @@
             this.browserPanel.Size = new System.Drawing.Size(1462, 1114);
             this.browserPanel.TabIndex = 1;
             // 
+            // debugGotoIndexButton
+            // 
+            this.debugGotoIndexButton.Location = new System.Drawing.Point(12, 30);
+            this.debugGotoIndexButton.Name = "debugGotoIndexButton";
+            this.debugGotoIndexButton.Size = new System.Drawing.Size(182, 47);
+            this.debugGotoIndexButton.TabIndex = 0;
+            this.debugGotoIndexButton.Text = "indexへ遷移";
+            this.debugGotoIndexButton.UseVisualStyleBackColor = true;
+            this.debugGotoIndexButton.Click += new System.EventHandler(this.debugGotoIndexButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
@@ -60,6 +73,7 @@
             this.Name = "MainForm";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.debugGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -68,6 +82,7 @@
 
         private System.Windows.Forms.GroupBox debugGroupBox;
         private System.Windows.Forms.Panel browserPanel;
+        private System.Windows.Forms.Button debugGotoIndexButton;
     }
 }
 

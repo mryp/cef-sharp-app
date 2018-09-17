@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,10 @@ namespace CefSharpApp
 {
     public partial class MainForm : Form
     {
+        #region 定数
+        private const string LOCAL_HTML_ROOT_DIR = "html";
+        #endregion
+
         #region フィールド
         private ChromiumWebBrowser _browser;
         #endregion
@@ -29,7 +34,7 @@ namespace CefSharpApp
 
         private void initBrowser()
         {
-            _browser = new ChromiumWebBrowser("http://www.google.co.jp/");
+            _browser = new ChromiumWebBrowser(getLocalAddress("index.html"));
             _browser.Dock = DockStyle.Fill;
             browserPanel.Controls.Add(_browser);
 
@@ -77,6 +82,19 @@ namespace CefSharpApp
         private void _browser_FrameLoadEnd(object sender, FrameLoadEndEventArgs e)
         {
             Debug.WriteLine($"FrameLoadEnd:{e.HttpStatusCode}");
+        }
+
+        private string getLocalAddress(string fileName)
+        {
+            Uri uri = new Uri(Path.GetFullPath($"{LOCAL_HTML_ROOT_DIR}/{fileName}"));
+            return uri.AbsoluteUri;
+        }
+        #endregion
+
+        #region デバッグ用メソッド
+        private void debugGotoIndexButton_Click(object sender, EventArgs e)
+        {
+            _browser.Load(getLocalAddress("index.html"));
         }
         #endregion
     }

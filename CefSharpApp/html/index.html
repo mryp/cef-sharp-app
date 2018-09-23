@@ -5,8 +5,24 @@
 	<title>index</title>
 </head>
 <body>
+    <script type="text/javascript">
+        function index_alert(message) {
+            alert("[JS] " + message);
+        }
+        function on_click() {
+            (async function () {
+                await CefSharp.BindObjectAsync("boundAsync");
+                boundAsync.getValue().then(function (result) {
+                    console.log(result);
+                    boundAsync.showMessage("値："+result+"を取得してJSから呼び出し");
+                });
+            })();
+        }
+    </script>
     <p>index</p>
     <a href="page1.html">page1</a>
     <a href="page2.html">page2</a>
+    <hr />
+    <button name="dialog_btn" onclick="on_click()">.NETダイアログ表示</button>
 </body>
 </html>

@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             this.debugGroupBox = new System.Windows.Forms.GroupBox();
-            this.browserPanel = new System.Windows.Forms.Panel();
             this.debugGotoIndexButton = new System.Windows.Forms.Button();
+            this.browserPanel = new System.Windows.Forms.Panel();
+            this.debugAlertButton = new System.Windows.Forms.Button();
             this.debugGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // debugGroupBox
             // 
+            this.debugGroupBox.Controls.Add(this.debugAlertButton);
             this.debugGroupBox.Controls.Add(this.debugGotoIndexButton);
             this.debugGroupBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.debugGroupBox.Location = new System.Drawing.Point(0, 0);
@@ -44,14 +46,6 @@
             this.debugGroupBox.TabIndex = 0;
             this.debugGroupBox.TabStop = false;
             this.debugGroupBox.Text = "DEBUG";
-            // 
-            // browserPanel
-            // 
-            this.browserPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.browserPanel.Location = new System.Drawing.Point(200, 0);
-            this.browserPanel.Name = "browserPanel";
-            this.browserPanel.Size = new System.Drawing.Size(1462, 1114);
-            this.browserPanel.TabIndex = 1;
             // 
             // debugGotoIndexButton
             // 
@@ -62,6 +56,24 @@
             this.debugGotoIndexButton.Text = "indexへ遷移";
             this.debugGotoIndexButton.UseVisualStyleBackColor = true;
             this.debugGotoIndexButton.Click += new System.EventHandler(this.debugGotoIndexButton_Click);
+            // 
+            // browserPanel
+            // 
+            this.browserPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.browserPanel.Location = new System.Drawing.Point(200, 0);
+            this.browserPanel.Name = "browserPanel";
+            this.browserPanel.Size = new System.Drawing.Size(1462, 1114);
+            this.browserPanel.TabIndex = 1;
+            // 
+            // debugAlertButton
+            // 
+            this.debugAlertButton.Location = new System.Drawing.Point(12, 83);
+            this.debugAlertButton.Name = "debugAlertButton";
+            this.debugAlertButton.Size = new System.Drawing.Size(182, 47);
+            this.debugAlertButton.TabIndex = 1;
+            this.debugAlertButton.Text = ".NET->JS";
+            this.debugAlertButton.UseVisualStyleBackColor = true;
+            this.debugAlertButton.Click += new System.EventHandler(this.debugAlertButton_Click);
             // 
             // MainForm
             // 
@@ -83,6 +95,7 @@
         private System.Windows.Forms.GroupBox debugGroupBox;
         private System.Windows.Forms.Panel browserPanel;
         private System.Windows.Forms.Button debugGotoIndexButton;
+        private System.Windows.Forms.Button debugAlertButton;
     }
 }
 

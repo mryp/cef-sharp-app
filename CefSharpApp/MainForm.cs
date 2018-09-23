@@ -22,6 +22,7 @@ namespace CefSharpApp
 
         #region フィールド
         private ChromiumWebBrowser _browser;
+        private BoundObject m_boundObject;
         #endregion
 
         #region 初期化・終了処理
@@ -34,16 +35,24 @@ namespace CefSharpApp
 
         private void initBrowser()
         {
-            _browser = new ChromiumWebBrowser(getLocalAddress("index.html"));
-            _browser.Dock = DockStyle.Fill;
+            //初期化
+            _browser = new ChromiumWebBrowser(getLocalAddress("index.html"))
+            {
+                Dock = DockStyle.Fill
+            };
             browserPanel.Controls.Add(_browser);
 
+            //イベント設定
             _browser.IsBrowserInitializedChanged += _browser_IsBrowserInitializedChanged;
             _browser.LoadError += _browser_LoadError;
             _browser.ConsoleMessage += _browser_ConsoleMessage;
             _browser.LoadingStateChanged += _browser_LoadingStateChanged;
             _browser.FrameLoadStart += _browser_FrameLoadStart;
             _browser.FrameLoadEnd += _browser_FrameLoadEnd;
+
+            //IF登録
+            m_boundObject = new BoundObject();
+            _browser.JavascriptObjectRepository.Register("boundAsync", m_boundObject, true, null);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -92,10 +101,28 @@ namespace CefSharpApp
         #endregion
 
         #region デバッグ用メソッド
+        /// <summary>
+        /// ページ遷移処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void debugGotoIndexButton_Click(object sender, EventArgs e)
         {
             _browser.Load(getLocalAddress("index.html"));
         }
+
+        /// <summary>
+        /// .NETからJavaScriptのメソッドを呼び出す
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void debugAlertButton_Click(object sender, EventArgs e)
+        {
+            string message = ".NET から呼び出し";
+            string script = $"index_alert(\"{message}\")";
+            _browser.GetMainFrame().ExecuteJavaScriptAsync(script);
+        }
         #endregion
+
     }
 }
